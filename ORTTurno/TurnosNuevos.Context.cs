@@ -13,10 +13,10 @@ namespace ORTTurno
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TurnoMedicoEntities : DbContext
+    public partial class DB_ACCESOEntities : DbContext
     {
-        public TurnoMedicoEntities()
-            : base("name=TurnoMedicoEntities")
+        public DB_ACCESOEntities()
+            : base("name=DB_ACCESOEntities")
         {
         }
     
@@ -25,6 +25,6 @@ namespace ORTTurno
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<tablaTurno> tablaTurnos { get; set; }
+        public virtual DbSet<Turno> Turnos { get; set; }
     }
 }

@@ -7,110 +7,113 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ORTTurno;
+using ORTTurno.Controllers;
+using ORTTurno.Models;
 
 namespace ORTTurno.Controllers
 {
-    public class tablaTurnoesController : Controller
+    public class TurnosController : Controller
     {
-        private TurnoMedicoEntities db = new TurnoMedicoEntities();
+        private DB_ACCESOEntities db = new DB_ACCESOEntities();
+        private Usuario usuario;
 
-        // GET: tablaTurnoes
+        // GET: Turnos
         public ActionResult Index()
         {
-            return View(db.tablaTurnos.ToList());
+            return View(db.Turnos.ToList());
         }
 
-        // GET: tablaTurnoes/Details/5
+        // GET: Turnos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tablaTurno tablaTurno = db.tablaTurnos.Find(id);
-            if (tablaTurno == null)
+            Turno turno = db.Turnos.Find(id);
+            if (turno == null)
             {
                 return HttpNotFound();
             }
-            return View(tablaTurno);
+            return View(turno);
         }
 
-        // GET: tablaTurnoes/Create
+        // GET: Turnos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: tablaTurnoes/Create
+        // POST: Turnos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Especialidad,Sede,Fecha,Nombre,Dni,Email")] tablaTurno tablaTurno)
+        public ActionResult Create([Bind(Include = "Id,Especialidad,Sede,Fecha,Usuario")] Turno turno)
         {
             if (ModelState.IsValid)
             {
-                db.tablaTurnos.Add(tablaTurno);
+                db.Turnos.Add(turno);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(tablaTurno);
+            return View(turno);
         }
 
-        // GET: tablaTurnoes/Edit/5
+        // GET: Turnos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tablaTurno tablaTurno = db.tablaTurnos.Find(id);
-            if (tablaTurno == null)
+            Turno turno = db.Turnos.Find(id);
+            if (turno == null)
             {
                 return HttpNotFound();
             }
-            return View(tablaTurno);
+            return View(turno);
         }
 
-        // POST: tablaTurnoes/Edit/5
+        // POST: Turnos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Especialidad,Sede,Fecha,Nombre,Dni,Email")] tablaTurno tablaTurno)
+        public ActionResult Edit([Bind(Include = "Id,Especialidad,Sede,Fecha,Usuario")] Turno turno)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tablaTurno).State = EntityState.Modified;
+                db.Entry(turno).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(tablaTurno);
+            return View(turno);
         }
 
-        // GET: tablaTurnoes/Delete/5
+        // GET: Turnos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            tablaTurno tablaTurno = db.tablaTurnos.Find(id);
-            if (tablaTurno == null)
+            Turno turno = db.Turnos.Find(id);
+            if (turno == null)
             {
                 return HttpNotFound();
             }
-            return View(tablaTurno);
+            return View(turno);
         }
 
-        // POST: tablaTurnoes/Delete/5
+        // POST: Turnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            tablaTurno tablaTurno = db.tablaTurnos.Find(id);
-            db.tablaTurnos.Remove(tablaTurno);
+            Turno turno = db.Turnos.Find(id);
+            db.Turnos.Remove(turno);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

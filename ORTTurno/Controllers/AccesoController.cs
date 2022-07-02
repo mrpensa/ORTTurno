@@ -8,12 +8,13 @@ using System.Web.Mvc;
 using ORTTurno.Models;
 using System.Data.SqlClient;
 using System.Data;
+using ORTTurno.Data;
 
 namespace ORTTurno.Controllers
 {
     public class AccesoController : Controller
     {
-        static string cadena = "Data Source=DESKTOP-TQI9FIK;Initial Catalog=DB_Acceso;Integrated Security=true";
+        private Usuario usuario { get; set; }
 
         public ActionResult Login()
         {
@@ -44,8 +45,8 @@ namespace ORTTurno.Controllers
                 return View();
             }
 
-            using (SqlConnection cn = new SqlConnection(cadena))
-            {
+            var cn = ConexionDb.Instance();
+            
 
                 SqlCommand cmd = new SqlCommand("sp_RegistrarUsuario", cn);
                 cmd.Parameters.AddWithValue("Correo", oUsuario.Correo);
@@ -62,7 +63,7 @@ namespace ORTTurno.Controllers
                 mensaje = cmd.Parameters["Mensaje"].Value.ToString();
 
 
-            }
+            
 
             ViewData["Mensaje"] = mensaje;
 
@@ -82,10 +83,9 @@ namespace ORTTurno.Controllers
         {
             oUsuario.Clave = ConvertirSha256(oUsuario.Clave);
 
-            using (SqlConnection cn = new SqlConnection(cadena))
-            {
+            var cn = ConexionDb.Instance();
 
-                SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", cn);
+            SqlCommand cmd = new SqlCommand("sp_ValidarUsuario", cn);
                 cmd.Parameters.AddWithValue("Correo", oUsuario.Correo);
                 cmd.Parameters.AddWithValue("Clave", oUsuario.Clave);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -94,21 +94,30 @@ namespace ORTTurno.Controllers
 
                 oUsuario.IdUsuario = Convert.ToInt32(cmd.ExecuteScalar().ToString());
 
-            }
+            
 
             if (oUsuario.IdUsuario != 0)
             {
 
                 Session["usuario"] = oUsuario;
+                if(this.usuario == null)
+                {
+                this.usuario = oUsuario;
+                }
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                ViewData["Mensaje"] = "usuario no encontrado";
+                ViewData["Mensaje"] = "usuario no encontrado";                
                 return View();
             }
 
 
+        }
+
+        public Usuario turnosUsuario()
+        {
+            return this.usuario;
         }
 
 

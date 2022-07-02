@@ -4,8 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="df34b3b942244e8488b37c48b8adc5b4" Name="Diagram1">
-        <EntityTypeShape EntityType="TurnoMedicoModel.tablaTurno" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="aa42368f833e4db7b5ddedc3945df397" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_ACCESOModel.Turno" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

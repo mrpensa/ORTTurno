@@ -4,55 +4,52 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TurnoMedicoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="tablaTurnos">
+      <Schema Namespace="DB_ACCESOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Turnos">
           <Key>
-            <PropertyRef Name="Dni" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Especialidad" Type="nvarchar" MaxLength="50" />
           <Property Name="Sede" Type="nvarchar" MaxLength="50" />
           <Property Name="Fecha" Type="date" />
-          <Property Name="Nombre" Type="nvarchar" MaxLength="50" />
-          <Property Name="Dni" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="Usuario" Type="int" />
         </EntityType>
-        <EntityContainer Name="TurnoMedicoModelStoreContainer">
-          <EntitySet Name="tablaTurnos" EntityType="Self.tablaTurnos" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="DB_ACCESOModelStoreContainer">
+          <EntitySet Name="Turnos" EntityType="Self.Turnos" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TurnoMedicoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="tablaTurno">
+      <Schema Namespace="DB_ACCESOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Turno">
           <Key>
-            <PropertyRef Name="Dni" />
+            <PropertyRef Name="Id" />
           </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Especialidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Sede" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Fecha" Type="DateTime" Precision="0" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Dni" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Usuario" Type="Int32" />
         </EntityType>
-        <EntityContainer Name="TurnoMedicoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="tablaTurnos" EntityType="Self.tablaTurno" />
+        <EntityContainer Name="DB_ACCESOEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Turnos" EntityType="Self.Turno" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TurnoMedicoModelStoreContainer" CdmEntityContainer="TurnoMedicoEntities">
-          <EntitySetMapping Name="tablaTurnos">
-            <EntityTypeMapping TypeName="TurnoMedicoModel.tablaTurno">
-              <MappingFragment StoreEntitySet="tablaTurnos">
+        <EntityContainerMapping StorageEntityContainer="DB_ACCESOModelStoreContainer" CdmEntityContainer="DB_ACCESOEntities">
+          <EntitySetMapping Name="Turnos">
+            <EntityTypeMapping TypeName="DB_ACCESOModel.Turno">
+              <MappingFragment StoreEntitySet="Turnos">
+                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Especialidad" ColumnName="Especialidad" />
                 <ScalarProperty Name="Sede" ColumnName="Sede" />
                 <ScalarProperty Name="Fecha" ColumnName="Fecha" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="Dni" ColumnName="Dni" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

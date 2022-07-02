@@ -12,13 +12,12 @@ namespace ORTTurno
     using System;
     using System.Collections.Generic;
     
-    public partial class tablaTurno
+    public partial class Turno
     {
+        public int Id { get; set; }
         public string Especialidad { get; set; }
         public string Sede { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-        public string Nombre { get; set; }
-        public int Dni { get; set; }
-        public string Email { get; set; }
+        public Nullable<int> Usuario { get; set; }
     }
 }
